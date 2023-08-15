@@ -2,8 +2,6 @@
 {% load static %}
 {% block content %}
 
-
-
 {% if profile %}
 
     <div class="container text-center">
@@ -19,8 +17,10 @@
         <div class="row">
             <div class="col-1">
             {% if profile.profile_image %}
-                <img src="{{ profile.profile_image_url }}"  width="50"
-                     height="50" class="round-circle" alt="{{ profile.user.username }}">
+                <img src="{{ profile.profile_image.url }}"  width=50
+                     height=50 class="round-circle" alt="{{ profile.user.username }}">
+            {% else %}
+                <img src="{% static 'images/default_picture_image.png' %}" width=50 height=50 class="rounded-circle" alt="{{ profile.user.username }}">
             {% endif %}
             </div>
 

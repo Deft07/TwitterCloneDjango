@@ -29,6 +29,18 @@
                         <small class="text-muted">
                            ({{ tweet.created_at }}) By
                             @{{ tweet.user.username }}
+                        {{ tweet.number_of_likes }} Likes
+
+                      {% if user in tweet.likes.all %}
+                          <a href="{% url 'tweet_like' tweet.id %}">
+                            <i class="fa fa-heart-o" style="color:red"></i>
+                          </a>
+                      {% else %}
+                          <a href="{% url 'tweet_like' tweet.id %}">
+                          <i class="fa-solid fa-heart" style="color:red"></i>
+                          </a>
+                      {% endif %}
+
                         </small>
                     </div>
             </div>
@@ -44,11 +56,11 @@
 
               <div class="row">
 
-              <div class="card text-center mb-3"  style="width: 18rem;">
+              <div class="card text-center mb-5"  style="width: 18rem;">
               <div class="card-body">
                 <h5 class="card-header">Follows</h5>
                     {% for following in profile.follows.all %}
-                       <a href="{% url 'profile' following.user.id %}"> @{{ following }}</a><br/>
+                       <a href="{% url 'profile' following.user.id %}">@{{ following }}</a><br/>
                     {% endfor %}
               </div>
               </div>
@@ -59,7 +71,7 @@
                 <div class="card-body">
                 <h5 class="card-header">Followed by</h5>
                 {% for following in profile.followed_by.all %}
-                    <a href="{% url 'profile' following.user.id %}"> @{{ following }}</a><br/>
+                    <a href="{% url 'profile' following.user.id %}">@{{ following }}</a><br/>
                 {% endfor %}
                 </div>
             </div>
